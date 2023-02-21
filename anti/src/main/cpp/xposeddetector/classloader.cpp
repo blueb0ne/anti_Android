@@ -5,6 +5,8 @@
 #include "xposed.h"
 #include "hash.h"
 #include "Utils.h"
+#include <string.h>
+
 
 jobject newLocalRef(JNIEnv *env, void *object) {
     static jobject (*NewLocalRef)(JNIEnv *, void *) = nullptr;
@@ -35,17 +37,46 @@ void deleteLocalRef(JNIEnv *env, jobject object) {
     }
 }
 
+
+//获取object class的描述
+char* getObjectdescription(JNIEnv* env, jobject obj){
+    char* desc = nullptr;
+
+    jclass objClazz = env->GetObjectClass(obj);
+    jclass clazz = env->FindClass("java/lang/Class");
+    jmethodID getClassMethod = env->GetMethodID(objClazz, "getClass", "()Ljava/lang/Class;");
+    jclass finalClazz = (jclass)env->CallObjectMethod(obj, getClassMethod);
+    jmethodID getNameMethod = env->GetMethodID(clazz, "getName", "()Ljava/lang/String;");
+    jstring jname = (jstring)env->CallObjectMethod(finalClazz, getNameMethod);
+
+    const char* name = env->GetStringUTFChars(jname, NULL);
+    if(name != NULL){
+        desc = strdup(name);
+    }
+    env->ReleaseStringUTFChars(jname, name);
+
+    env->DeleteLocalRef(jname);
+    env->DeleteLocalRef(finalClazz);
+    env->DeleteLocalRef(clazz);
+    env->DeleteLocalRef(objClazz);
+
+    return desc;
+}
+
+
 class ClassLoaderVisitor : public art::SingleRootVisitor {
 public:
     ClassLoaderVisitor(C_JNIEnv *env, jclass classLoader) : env_(env), classLoader_(classLoader) {
-
+        mClassCnt = 0;
     }
 
     void VisitRoot(art::mirror::Object *root, const art::RootInfo &info ATTRIBUTE_UNUSED) final {
         LOGE("in VisitRoot");
         jobject object = newLocalRef((JNIEnv *) env_, (jobject) root);
         if (object != nullptr) {
-            LOGE("in VisitRoot object != nullptr");
+            const char* desc = getObjectdescription((JNIEnv *) env_, object);
+            LOGE("in VisitRoot object != nullptr,%s",desc);
+            mClassCnt++;
             if ((*env_)->IsInstanceOf((JNIEnv *) env_, object, classLoader_)) {
                 xposed::doAntiXposed(env_, object, (intptr_t) root);
             }
@@ -53,9 +84,14 @@ public:
         }
     }
 
+    int getClassNumber(){
+        return mClassCnt;
+    }
+
 private:
     C_JNIEnv *env_;
     jclass classLoader_;
+    int mClassCnt;
 };
 
 void classloader::checkGlobalRef(C_JNIEnv *env, jclass clazz) {
@@ -69,6 +105,7 @@ void classloader::checkGlobalRef(C_JNIEnv *env, jclass clazz) {
     (*env)->GetJavaVM((JNIEnv *) env, &jvm);
     ClassLoaderVisitor visitor(env, clazz);
     VisitRoots(jvm, &visitor);
+    LOGE("checkGlobalRef, class number:%d",visitor.getClassNumber());
 }
 
 class WeakClassLoaderVisitor : public art::IsMarkedVisitor {

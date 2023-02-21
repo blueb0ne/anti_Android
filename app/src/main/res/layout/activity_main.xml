@@ -7,16 +7,14 @@
     android:stretchColumns="0,3"
     android:gravity="center_vertical"
     >
-
     <TableRow>
-        <TextView />
+
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="133dp"
+            android:layout_height="match_parent"
             android:text="@string/frida"
-            tools:layout_editor_absoluteX="88dp"
-            tools:layout_editor_absoluteY="140dp"
+
             tools:ignore="MissingConstraints" />
 
 
@@ -25,20 +23,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="141dp"
+
             tools:ignore="MissingConstraints" />
     </TableRow>
 
     <TableRow>
-        <TextView />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/xposed"
-            tools:layout_editor_absoluteX="87dp"
-            tools:layout_editor_absoluteY="188dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -46,20 +41,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="188dp"
             tools:ignore="MissingConstraints" />
     </TableRow>
 
     <TableRow>
-        <TextView />
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/debug"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="235dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -67,20 +58,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="235dp"
             tools:ignore="MissingConstraints" />
     </TableRow>
 
     <TableRow>
-        <TextView />
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dualApp"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="277dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -88,20 +75,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="277dp"
             tools:ignore="MissingConstraints" />
     </TableRow>
 
     <TableRow>
-        <TextView />
+
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/emulator"
-            tools:layout_editor_absoluteX="87dp"
-            tools:layout_editor_absoluteY="319dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -109,21 +92,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="319dp"
             tools:ignore="MissingConstraints" />
     </TableRow>
 
 
     <TableRow>
-        <TextView />
+
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/root"
-            tools:layout_editor_absoluteX="88dp"
-            tools:layout_editor_absoluteY="392dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -131,20 +110,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="392dp"
             tools:ignore="MissingConstraints" />
     </TableRow>
 
     <TableRow>
-        <TextView />
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/memDump"
-            tools:layout_editor_absoluteX="87dp"
-            tools:layout_editor_absoluteY="433dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -152,9 +127,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            tools:layout_editor_absoluteX="267dp"
-            tools:layout_editor_absoluteY="432dp"
             tools:ignore="MissingConstraints" />
     </TableRow>
-
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="304dp"
+        android:text="detect"
+        />
 </TableLayout>
+
+
